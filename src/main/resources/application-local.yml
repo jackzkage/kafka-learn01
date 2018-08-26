@@ -1,0 +1,33 @@
+#日志级别和路径
+logging:
+  path: /app/data/logs/
+  level:
+    default: debug
+
+spring:
+  kafka:
+    bootstrap-servers: 192.168.1.11:9092,192.168.1.12:9092,192.168.1.13:9092
+    listener:
+      ack-mode: manual_immediate
+      concurrency: 10
+      pollTimeout: 1500
+      type: batch
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      batch-size: 4096
+      buffer-memory: 40960
+      retries: 1
+      properties:
+        linger.ms: 0
+    consumer:
+      group-id: kafka-demo1-group
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 100
+      auto-offset-reset: earliest
+      properties:
+        session.timeout.ms: 15000
+
+
