@@ -3,6 +3,6 @@ server:
 
 spring:
   application:
-    name: kafka-demo1
+    name: kafka-learn01
   profiles:
     active: local

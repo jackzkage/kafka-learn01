@@ -4,12 +4,15 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @author lijie.zh
+ */
 @Data
 public class Message {
-    private Long id;    //id
+    private Long id;
 
-    private String msg; //消息
+    private String msg;
 
-    private Date sendTime;  //时间戳
+    private Date sendTime;
 
 }

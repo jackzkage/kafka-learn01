@@ -51,11 +51,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.sf</groupId>
-            <artifactId>pg-idworker</artifactId>
-            <version>${pg-idworker.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
@@ -69,7 +64,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.49</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.fasterxml</groupId>
+            <artifactId>classmate</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -7,38 +7,26 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * @author lijie.zh
+ */
 @Component
 @Slf4j
 public class KafkaConsumer {
 
-    @KafkaListener(topics = {"pg-topic"}, groupId = "group1")
-    public void listen(List<ConsumerRecord<?, ?>> records, Acknowledgment ack) throws InterruptedException {
-        try {
-            for (ConsumerRecord record : records) {
-                Optional<?> kafkaMessage = Optional.ofNullable(record.value());
-                if (kafkaMessage.isPresent()) {
-                    Object message = kafkaMessage.get();
-                    log.info("-----------------{}", record);
-                }
-            }
-        } finally {
-            ack.acknowledge();//手动提交偏移量
-        }
-    }
 
-
-    @KafkaListener(topics = {"test-topic"})
+    @KafkaListener(topics = {Constant.TEST_TOPIC}, groupId = Constant.DEFAULT_GROUP)
     public void consumerMsg(List<ConsumerRecord<?, ?>> records, Acknowledgment ack) {
         try {
             for (ConsumerRecord record : records) {
-                log.debug("-----------------{},{}", record, String.format("offset = %d, key = %s, value = %s%n \n", record.offset(), record.key(), record.value()));
+                log.debug("\n消费到消息：{},{}", record, String.format("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value()));
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ack.acknowledge();//手动提交偏移量
+            //手动提交偏移量
+            ack.acknowledge();
         }
     }
 

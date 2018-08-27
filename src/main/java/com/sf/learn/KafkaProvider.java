@@ -14,6 +14,9 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * @author lijie.zh
+ */
 @Component
 @Slf4j
 public class KafkaProvider {
@@ -24,14 +27,17 @@ public class KafkaProvider {
     @Resource
     private KafkaProperties kafkaProperties;
 
-    //发送消息方法
+    /**
+     * 发送消息方法
+     * @param num
+     */
     public void send(Long num) {
         Message message = new Message();
         message.setId(num);
         message.setMsg(UUID.randomUUID().toString());
         message.setSendTime(new Date());
         log.info("+++++++++++++++++++++  message = {}", JSON.toJSONString(message));
-        ListenableFuture listenableFuture = kafkaTemplate.send("test-topic", JSON.toJSONString(message));
+        ListenableFuture listenableFuture = kafkaTemplate.send(Constant.TEST_TOPIC, JSON.toJSONString(message));
         //发送成功后回调
         SuccessCallback successCallback = result -> System.out.println("发送成功" + result);
 
